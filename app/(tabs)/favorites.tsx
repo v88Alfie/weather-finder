@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const index = () => {
+const Favorites = () => {
   return (
     <View>
-      <Text className="bg-red-400">index</Text>
+      <Text>Favorites</Text>
     </View>
   );
 };
 
-export default index;
+export default Favorites;
 
 const styles = StyleSheet.create({});

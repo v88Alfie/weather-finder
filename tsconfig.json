@@ -15,5 +15,5 @@
     "expo-env.d.ts",
     "screens/HomeScreen.js",
     "nativewind-env.d.ts"
-  ]
+, "app/(tabs)/index.tsx"  ]
 }
