@@ -18,8 +18,6 @@ export const useFetchCityWeather = (city: string, temperature: boolean) => {
     },
   });
 
-  //console.log(cityWeather, "cityWeather");
-
   return cityWeather;
 };
 
