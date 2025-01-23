@@ -5,7 +5,7 @@ export const useFetchCityWeather = (city: string, temperature: boolean) => {
 
   console.log(units, "units");
 
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=800869c5db905379fa600af725ed7d08`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=${units}&appid=${process.env.EXPO_PUBLIC_WEATHER_API_KEY}`;
 
   const cityWeather = useQuery({
     queryKey: ["weather", city, temperature],
@@ -23,7 +23,7 @@ export const useFetchCityWeather = (city: string, temperature: boolean) => {
 
 export const useFetchCityForecast = (city: string, temperature: boolean) => {
   const units = temperature ? "imperial" : "metrics";
-  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=800869c5db905379fa600af725ed7d08`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=${units}&appid=${process.env.EXPO_PUBLIC_WEATHER_API_KEY}`;
   const timeTaken = "12:00:00";
   const dateToday = new Date().toISOString().split("T")[0];
 
