@@ -27,14 +27,19 @@ const index = () => {
   const [searchQuery, setSearchQuery] = React.useState("Manila");
   const [temperature, setTemperature] = React.useState<boolean>(false);
 
-  const fetchCityWeather = useFetchCityWeather(searchQuery, temperature);
+  const {
+    data: weather,
+    isLoading,
+    error,
+  } = useFetchCityWeather(searchQuery, temperature);
+
   const fetchCityForecast = useFetchCityForecast(searchQuery, temperature);
 
   const debounced = useDebouncedCallback((value) => {
     setSearchQuery(value);
   }, 1000);
 
-  if (fetchCityWeather.isLoading) {
+  if (isLoading) {
     console.log("LOADING...");
   }
 
@@ -42,6 +47,7 @@ const index = () => {
 
   return (
     <View className="flex-1 relative">
+      {console.log(weather, "weather")}
       <StatusBar style="light" />
       <ImageBackground
         blurRadius={100}
@@ -73,8 +79,7 @@ const index = () => {
               <View className="flex-row items-center gap-4">
                 <FontAwesome name="map-marker" size={20} color="gray" />
                 <Text className="text-gray-600 text-2xl font-bold">
-                  {fetchCityWeather?.data?.name},{" "}
-                  {fetchCityWeather?.data?.sys.country}
+                  {weather?.name}, {weather?.sys.country}
                 </Text>
               </View>
               <Text className="text-gray-600 text-2xl font-bold">
@@ -85,16 +90,16 @@ const index = () => {
             <View className="flex-row items-center justify-center">
               <Image
                 source={{
-                  uri: `https://openweathermap.org/img/wn/${fetchCityWeather?.data?.weather[0].icon}@4x.png`,
+                  uri: `https://openweathermap.org/img/wn/${weather?.weather[0].icon}@4x.png`,
                 }}
                 className="w-52 h-52"
               />
               <View className="space-y-2">
                 <Text className="text-center font-bold text-gray-600 text-6xl ml-5">
-                  {Math.round(fetchCityWeather?.data?.main.temp)}&#176;
+                  {Math.round(weather?.main.temp)}&#176;
                 </Text>
                 <Text className="text-center font-bold text-gray-600 text-xl tracking-widest">
-                  {fetchCityWeather?.data?.weather[0].main}
+                  {weather?.weather[0].main}
                 </Text>
               </View>
             </View>
@@ -106,7 +111,7 @@ const index = () => {
                     Humidity
                   </Text>
                   <Text className="text-gray-600 font-semibold text-2xl">
-                    {fetchCityWeather?.data?.main.humidity}%
+                    {weather?.main.humidity}%
                   </Text>
                 </View>
               </View>
@@ -117,7 +122,7 @@ const index = () => {
                     Wind Speed
                   </Text>
                   <Text className="text-gray-600 font-semibold text-2xl">
-                    {fetchCityWeather?.data?.wind.speed} km/h
+                    {weather?.wind.speed} km/h
                   </Text>
                 </View>
               </View>
